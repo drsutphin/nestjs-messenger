@@ -1,0 +1,83 @@
+{
+  "name": "nestjs-messenger",
+  "version": "0.0.0",
+  "description": "Fully-featured messaging module for NestJS, providing email and SMS sending capabilities",
+  "author": "Simon Emms <simon@simonemms.com>",
+  "license": "MIT",
+  "main": "index.js",
+  "files": [
+    "dist/**/*",
+    "*.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "copyfiles CHANGELOG.md CONTRIBUTING.md LICENSE package.json package-lock.json README.md dist",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "eslint --ext .ts,.js ./src",
+    "start:dev": "tsc -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "keywords": [
+    "nestjs",
+    "email",
+    "nodemailer",
+    "sms"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/mrsimonemms/nestjs-messenger"
+  },
+  "bugs": "https://gitlab.com/mrsimonemms/nestjs-messenger/-/issues",
+  "peerDependencies": {
+    "@nestjs/common": "^6.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "copyfiles": "^2.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-plugin-import": "^2.20.2",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies2": {
+    "@nestjs/common": "^6.0.0",
+    "@nestjs/core": "^6.0.0",
+    "@nestjs/platform-express": "^6.0.0",
+    "@nestjs/testing": "6.1.1",
+    "@types/express": "4.16.1",
+    "@types/jest": "24.0.11",
+    "@types/node": "11.13.4",
+    "@types/supertest": "2.0.7",
+    "jest": "24.7.1",
+    "prettier": "1.17.0",
+    "supertest": "4.0.2",
+    "ts-jest": "24.0.2",
+    "ts-node": "8.1.0",
+    "tsc-watch": "2.2.1",
+    "tsconfig-paths": "3.8.0",
+    "tslint": "5.16.0",
+    "typescript": "3.4.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
