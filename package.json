@@ -8,7 +8,7 @@
   "scripts": {
     "prebuild": "rm -Rf ./dist",
     "build": "tsc -p ./tsconfig.build.json",
-    "postbuild": "copyfiles CHANGELOG.md CONTRIBUTING.md LICENSE package.json package-lock.json README.md dist",
+    "postbuild": "copyfiles CONTRIBUTING.md LICENSE package.json package-lock.json README.md dist",
     "dev": "nodemon -x 'npm start' -e js,ts,json",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint --ext .ts,.js ./src",

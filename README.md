@@ -28,7 +28,7 @@ The emails are transported using [NodeMailer](https://nodemailer.com) to provide
 
 ## Change Log
 
-See [Changelog](CHANGELOG.md) for more information.
+See [Changelog](CHANGELOG) for more information.
 
 ## Contributing
 
