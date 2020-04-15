@@ -1,0 +1,6 @@
+# 1.0.0 (2020-04-15)
+
+
+### Features
+
+* **email:** configure email sending using nodemailer and compilation using pug/handlebars and mjml ([cb5f614](https://gitlab.com/mrsimonemms/nestjs-messenger/commit/cb5f614903403d159bcadcb80b79b17ed5a34e80))
