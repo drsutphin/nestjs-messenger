@@ -1,0 +1,73 @@
+include:
+  - project: "mrsimonemms/gitlab-ci-tasks"
+    ref: "master"
+    file: "tasks/common.yml"
+
+image: node:12-alpine
+
+###########
+# Install #
+###########
+install:
+  stage: install
+  cache:
+    paths:
+      - ./node_modules
+  artifacts:
+    paths:
+      - ./node_modules
+  script:
+    - npm ci
+
+########
+# Test #
+########
+audit:
+  stage: test
+  script: npm audit
+
+coverage:
+  stage: test
+  coverage: /All files\s*\|\s*([\d\.]+)/
+  script: npm run test:cov -- --color=false
+
+lint:
+  stage: test
+  script: npm run lint
+
+unit:
+  stage: test
+  script: npm test
+
+#########
+# Build #
+#########
+build:
+  stage: build
+  script: npm run build
+  artifacts:
+    paths:
+      - ./dist
+
+###########
+# Publish #
+###########
+publish-release-npm:
+  stage: publish
+  script:
+    - export VERSION=$(cat VERSION)
+    - echo $VERSION
+    - cd dist
+    - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ./.npmrc
+    - npm whoami
+    - npm version ${VERSION} --no-git-tag-version --allow-same-version
+    - npm publish
+  only:
+    refs:
+      - master
+
+###########
+# Release #
+###########
+update_version:
+  extends: .repo_update
