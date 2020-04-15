@@ -10,14 +10,10 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./",
-    "noLib": false
+    "noLib": false,
+    "esModuleInterop": true
   },
   "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "dist",
-    "example",
-    "node_modules"
+    "**/*.ts"
   ]
 }

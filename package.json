@@ -5,16 +5,14 @@
   "author": "Simon Emms <simon@simonemms.com>",
   "license": "MIT",
   "main": "index.js",
-  "files": [
-    "dist/**/*",
-    "*.md"
-  ],
   "scripts": {
-    "build": "tsc",
+    "prebuild": "rm -Rf ./dist",
+    "build": "tsc -p ./tsconfig.build.json",
     "postbuild": "copyfiles CHANGELOG.md CONTRIBUTING.md LICENSE package.json package-lock.json README.md dist",
+    "dev": "nodemon -x 'npm start' -e js,ts,json",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint --ext .ts,.js ./src",
-    "start:dev": "tsc -w",
+    "start": "ts-node -r reflect-metadata ./example/src/main.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
@@ -23,6 +21,7 @@
   "keywords": [
     "nestjs",
     "email",
+    "mjml",
     "nodemailer",
     "sms"
   ],
@@ -35,16 +34,39 @@
   },
   "bugs": "https://gitlab.com/mrsimonemms/nestjs-messenger/-/issues",
   "peerDependencies": {
-    "@nestjs/common": "^6.0.0"
+    "@nestjs/common": "*",
+    "handlebars": "*",
+    "pug": "*"
   },
-  "dependencies": {},
+  "optionalDependencies": {
+    "pug": "*"
+  },
+  "dependencies": {
+    "glob": "^7.1.6",
+    "mjml": "^4.6.2",
+    "nodemailer": "^6.4.6"
+  },
   "devDependencies": {
+    "@nestjs/common": "^7.0.7",
+    "@types/glob": "^7.1.1",
+    "@types/jest": "^25.2.1",
+    "@types/mjml": "^4.0.4",
+    "@types/node": "^13.11.1",
+    "@types/nodemailer": "^6.4.0",
+    "@types/pug": "^2.0.4",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "copyfiles": "^2.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-plugin-import": "^2.20.2",
+    "handlebars": "^4.7.6",
+    "jest": "^25.3.0",
+    "nodemon": "^2.0.3",
     "prettier": "^2.0.4",
+    "pug": "^2.0.4",
+    "reflect-metadata": "^0.1.13",
+    "ts-jest": "^25.3.1",
+    "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
   },
   "devDependencies2": {
@@ -78,6 +100,14 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
