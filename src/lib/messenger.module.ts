@@ -5,7 +5,12 @@
 /* Node modules */
 
 /* Third-party modules */
-import { DynamicModule, Module, Provider } from '@nestjs/common';
+import {
+  DynamicModule,
+  Global,
+  Module,
+  Provider,
+} from '@nestjs/common';
 
 /* Files */
 import MessageController from '../controller/message.controller';
@@ -17,6 +22,7 @@ import {
   IMessengerOptions,
 } from './messenger.interface';
 
+@Global()
 @Module({
   providers: [
     MessengerService,
