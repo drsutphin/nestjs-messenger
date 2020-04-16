@@ -1,3 +1,16 @@
+# [1.1.0](https://gitlab.com/mrsimonemms/nestjs-messenger/compare/v1.0.0...v1.1.0) (2020-04-16)
+
+
+### Bug Fixes
+
+* **module:** add @Global option to make a global module ([3e2203a](https://gitlab.com/mrsimonemms/nestjs-messenger/commit/3e2203a41117a0601e3196f251f853bbafad836a))
+* **module:** export the constants from the index file ([62d6766](https://gitlab.com/mrsimonemms/nestjs-messenger/commit/62d67661d7439098379ac90efd46188e7b1ec1f7))
+
+
+### Features
+
+* **verify-email-connection:** add verification method to check connection status ([4915d3b](https://gitlab.com/mrsimonemms/nestjs-messenger/commit/4915d3beace208a5d68bc0c31e4f423e7ee38340))
+
 # 1.0.0 (2020-04-15)
 
 
