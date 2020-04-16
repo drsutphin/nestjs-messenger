@@ -34,4 +34,17 @@ export default class MessengerService {
 
     return this.messengerTransports.emailTransport.sendMail(opts);
   }
+
+  async verifyEmailConnection() : Promise<boolean> {
+    if (!this.messengerTransports.emailTransport) {
+      throw new Error('Email transport not configured');
+    }
+
+    const isVerified = await this.messengerTransports.emailTransport.verify();
+    if (!isVerified) {
+      throw new Error('Unable to verify email transport connection');
+    }
+
+    return true;
+  }
 }

@@ -11,19 +11,20 @@
 import MessengerService from './messenger.service';
 
 describe('Messenger service', () => {
-  describe('#sendEmail', () => {
-    let messenger: MessengerService;
-    let messengerTransports: any;
-    beforeEach(() => {
-      messengerTransports = {
-        emailTransport: {
-          sendMail: jest.fn()
-            .mockResolvedValue(true),
-        },
-      };
-      messenger = new MessengerService(messengerTransports);
-    });
+  let messenger: MessengerService;
+  let messengerTransports: any;
+  beforeEach(() => {
+    messengerTransports = {
+      emailTransport: {
+        sendMail: jest.fn()
+          .mockResolvedValue(true),
+        verify: jest.fn(),
+      },
+    };
+    messenger = new MessengerService(messengerTransports);
+  });
 
+  describe('#sendEmail', () => {
     it('should error if no email transport configured', async () => {
       messenger = new MessengerService({});
 
@@ -98,6 +99,44 @@ describe('Messenger service', () => {
       expect(await messenger.sendEmail(opts)).toBe(true);
 
       expect(messengerTransports.emailTransport.sendMail).toBeCalledWith(opts);
+    });
+  });
+
+  describe('#verifyEmailConnection', () => {
+    it('should error if no email transport configured', async () => {
+      messenger = new MessengerService({});
+
+      try {
+        await messenger.verifyEmailConnection();
+
+        throw new Error('invalid');
+      } catch (err) {
+        expect(err).toEqual(new Error('Email transport not configured'));
+
+        expect(messengerTransports.emailTransport.verify).not.toBeCalled();
+      }
+    });
+
+    it('should return false from the verification and then throw error', async () => {
+      messengerTransports.emailTransport.verify.mockResolvedValue(false);
+
+      try {
+        await messenger.verifyEmailConnection();
+
+        throw new Error('invalid');
+      } catch (err) {
+        expect(err).toEqual(new Error('Unable to verify email transport connection'));
+
+        expect(messengerTransports.emailTransport.verify).toBeCalledWith();
+      }
+    });
+
+    it('should return true if verification succeeds', async () => {
+      messengerTransports.emailTransport.verify.mockResolvedValue(true);
+
+      expect(await messenger.verifyEmailConnection()).toBe(true);
+
+      expect(messengerTransports.emailTransport.verify).toBeCalledWith();
     });
   });
 });
