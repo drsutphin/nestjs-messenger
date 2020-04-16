@@ -24,6 +24,17 @@ describe('Messenger service', () => {
     messenger = new MessengerService(messengerTransports);
   });
 
+  describe('#emailIsConfigured', () => {
+    it('should return false if email not configured', () => {
+      messenger = new MessengerService({});
+
+      expect(messenger.emailIsConfigured()).toBe(false);
+    });
+    it('should return true if email configured', () => {
+      expect(messenger.emailIsConfigured()).toBe(true);
+    });
+  });
+
   describe('#sendEmail', () => {
     it('should error if no email transport configured', async () => {
       messenger = new MessengerService({});

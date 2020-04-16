@@ -22,6 +22,10 @@ export default class MessengerService {
     @Inject(MESSENGER_TRANSPORT) private readonly messengerTransports: IMessengerTransports,
   ) {}
 
+  emailIsConfigured() : boolean {
+    return !!this.messengerTransports.emailTransport;
+  }
+
   async sendEmail(opts: Mail.Options, message?: IMessageSendOpts) : Promise<SentMessageInfo> {
     if (!this.messengerTransports.emailTransport) {
       throw new Error('Email transport not configured');
