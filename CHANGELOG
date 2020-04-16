@@ -1,3 +1,10 @@
+## [1.1.1](https://gitlab.com/mrsimonemms/nestjs-messenger/compare/v1.1.0...v1.1.1) (2020-04-16)
+
+
+### Bug Fixes
+
+* **messenger-service:** add check to see if email is configured ([577b386](https://gitlab.com/mrsimonemms/nestjs-messenger/commit/577b386c80c525e335d73971bd4d2bdb3f00c241))
+
 # [1.1.0](https://gitlab.com/mrsimonemms/nestjs-messenger/compare/v1.0.0...v1.1.0) (2020-04-16)
 
 
