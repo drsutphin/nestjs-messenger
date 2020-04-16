@@ -3,8 +3,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MessengerModule } from '../../src';
-import { IMessengerOptions } from '../../src/';
+import HealthModule  from './health/health.module';
+import { MessengerModule, IMessengerOptions } from '../../src';
 
 @Module({
   imports: [
@@ -24,8 +24,8 @@ import { IMessengerOptions } from '../../src/';
               secure: false,
               auth: {
                 // Generate at https://ethereal.email/
-                user: '',
-                pass: '',
+                user: 'tyrique.reichert@ethereal.email',
+                pass: 'YNpjFwkX2ZzH5fBvp3',
               },
             },
           },
@@ -62,6 +62,7 @@ import { IMessengerOptions } from '../../src/';
     //     },
     //   },
     // }),
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
