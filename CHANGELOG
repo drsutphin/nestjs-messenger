@@ -1,3 +1,10 @@
+# [1.2.0](https://gitlab.com/mrsimonemms/nestjs-messenger/compare/v1.1.1...v1.2.0) (2020-04-17)
+
+
+### Features
+
+* **provider:** add option to disable email transport connection check on boot ([13794e3](https://gitlab.com/mrsimonemms/nestjs-messenger/commit/13794e3a5be64a8753c341b91179855a7c8b5310))
+
 ## [1.1.1](https://gitlab.com/mrsimonemms/nestjs-messenger/compare/v1.1.0...v1.1.1) (2020-04-16)
 
 
