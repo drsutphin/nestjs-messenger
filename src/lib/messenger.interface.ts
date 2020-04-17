@@ -65,6 +65,7 @@ export interface IMessengerOptions {
   email?: {
     generator?: IMessageGeneratorOpts;
     transport: TransportOptionsStatic;
+    verifyConnectionOnBoot?: boolean;
   };
 }
 

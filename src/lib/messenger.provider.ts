@@ -38,9 +38,12 @@ export function createMessengerTransportProvider() : Provider {
       if (opts.email) {
         emailTransport = createTransport(opts.email.transport);
 
-        const isVerified = await emailTransport.verify();
-        if (!isVerified) {
-          throw new Error('Messenger: nodemailer failed to verify');
+        /* Verify the connection by default */
+        if (opts.email.verifyConnectionOnBoot !== false) {
+          const isVerified = await emailTransport.verify();
+          if (!isVerified) {
+            throw new Error('Messenger: nodemailer failed to verify');
+          }
         }
 
         /* Configure the email generator */
