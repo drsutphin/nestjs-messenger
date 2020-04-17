@@ -69,6 +69,48 @@ describe('Messenger provider', () => {
         (<any> createTransport).mockReturnValue(mockTransport);
       });
 
+      it('should not call the verification if option set to false', async () => {
+        const opts = {
+          email: {
+            verifyConnectionOnBoot: false,
+            transport: {
+              hello: 'world',
+            },
+          },
+        } as IMessengerOptions;
+
+        expect(await provider.useFactory(opts)).toEqual({
+          emailTemplate: undefined,
+          emailTransport: mockTransport,
+        });
+
+        expect(createTransport).toBeCalledWith(opts.email.transport);
+
+        expect(mockTransport.verify).not.toBeCalled();
+      });
+
+      it('should call the verification if option set to true', async () => {
+        const opts = {
+          email: {
+            verifyConnectionOnBoot: true,
+            transport: {
+              hello: 'world',
+            },
+          },
+        } as IMessengerOptions;
+
+        mockTransport.verify.mockResolvedValue(true);
+
+        expect(await provider.useFactory(opts)).toEqual({
+          emailTemplate: undefined,
+          emailTransport: mockTransport,
+        });
+
+        expect(createTransport).toBeCalledWith(opts.email.transport);
+
+        expect(mockTransport.verify).toBeCalled();
+      });
+
       it('should configure the transport with no generator', async () => {
         const opts = {
           email: {
@@ -86,6 +128,8 @@ describe('Messenger provider', () => {
         });
 
         expect(createTransport).toBeCalledWith(opts.email.transport);
+
+        expect(mockTransport.verify).toBeCalled();
       });
 
       it('should throw an error if the transport fails to verify', async () => {
@@ -108,6 +152,8 @@ describe('Messenger provider', () => {
         }
 
         expect(createTransport).toBeCalledWith(opts.email.transport);
+
+        expect(mockTransport.verify).toBeCalled();
       });
 
       it('should configure the transport with generator - pug', async () => {
@@ -144,6 +190,8 @@ describe('Messenger provider', () => {
           ...opts.email.generator,
           engine: PugGenerator.prototype,
         });
+
+        expect(mockTransport.verify).toBeCalled();
       });
 
       it('should configure the transport with generator - handlebars', async () => {
@@ -180,6 +228,8 @@ describe('Messenger provider', () => {
           ...opts.email.generator,
           engine: HandlebarsGenerator.prototype,
         });
+
+        expect(mockTransport.verify).toBeCalled();
       });
 
       it('should configure the transport with generator - strategy', async () => {
@@ -215,6 +265,8 @@ describe('Messenger provider', () => {
         expect(createTransport).toBeCalledWith(opts.email.transport);
 
         expect(MessageGenerator).toBeCalledWith(opts.email.generator);
+
+        expect(mockTransport.verify).toBeCalled();
       });
     });
   });
