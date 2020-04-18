@@ -19,7 +19,7 @@ export default class HealthController {
   @Get('/')
   async healthCheck() {
     return {
-      verify: await this.messageService.verifyEmail(),
+      verify: await this.messageService.verifyEmailConnection(),
     };
   }
 }
