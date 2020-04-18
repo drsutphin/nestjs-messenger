@@ -84,6 +84,8 @@ describe('Message controller', () => {
         url: 'some-url',
         query: {
           hello: 'world',
+          'object.in.dot.notation': 'value',
+          'object.in.dot.notation2': 'value2',
         },
       };
       const res = {
@@ -94,7 +96,19 @@ describe('Message controller', () => {
 
       await controller.previewMessage(template, req, res);
 
-      expect(transport.emailTemplate.generate).toBeCalledWith(template, req.query);
+      expect(transport.emailTemplate.generate).toBeCalledWith(template, {
+        hello: 'world',
+        'object.in.dot.notation': 'value',
+        'object.in.dot.notation2': 'value2',
+        object: {
+          in: {
+            dot: {
+              notation: 'value',
+              notation2: 'value2',
+            },
+          },
+        },
+      });
       expect(res.send).toBeCalledWith(output);
     });
 

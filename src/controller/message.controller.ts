@@ -13,10 +13,11 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { MESSENGER_TRANSPORT } from '../lib/messenger.constants';
-import { IMessengerTransports } from '../lib/messenger.interface';
+import lodashSet from 'lodash.set';
 
 /* Files */
+import { MESSENGER_TRANSPORT } from '../lib/messenger.constants';
+import { IMessengerTransports } from '../lib/messenger.interface';
 
 @Controller('/message-preview')
 export default class MessageController {
@@ -37,7 +38,15 @@ export default class MessageController {
     }
 
     try {
-      const output = await this.messengerTransports.emailTemplate.generate(template, req.query);
+      const { query } = req;
+
+      /* Convert dot notation into objects */
+      Object.keys(query)
+        .forEach((key) => {
+          lodashSet(query, key.split('.'), query[key]);
+        });
+
+      const output = await this.messengerTransports.emailTemplate.generate(template, query);
 
       return res.send(output);
     } catch (err) {
