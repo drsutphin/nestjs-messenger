@@ -1,3 +1,10 @@
+## [1.2.1](https://gitlab.com/mrsimonemms/nestjs-messenger/compare/v1.2.0...v1.2.1) (2020-04-18)
+
+
+### Bug Fixes
+
+* **preview:** add dot notation support for the message preview ([77231b7](https://gitlab.com/mrsimonemms/nestjs-messenger/commit/77231b739afd3863fb0df6ce7b28ff59f49f2881))
+
 # [1.2.0](https://gitlab.com/mrsimonemms/nestjs-messenger/compare/v1.1.1...v1.2.0) (2020-04-17)
 
 

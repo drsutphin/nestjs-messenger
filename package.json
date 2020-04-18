@@ -1,6 +1,6 @@
 {
   "name": "nestjs-messenger",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Fully-featured messaging module for NestJS, providing email and SMS sending capabilities",
   "author": "Simon Emms <simon@simonemms.com>",
   "license": "MIT",
