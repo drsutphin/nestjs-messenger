@@ -16,7 +16,7 @@ import {
 import MessageController from '../controller/message.controller';
 import MessengerService from './messenger.service';
 import { createMessengerProvider, createMessengerTransportProvider } from './messenger.provider';
-import { MESSENGER_MODULE_OPTS } from './messenger.constants';
+import { MESSENGER_TRANSPORT, MESSENGER_MODULE_OPTS } from './messenger.constants';
 import {
   IMessengerAsyncOpts,
   IMessengerOptions,
@@ -29,7 +29,11 @@ import {
     createMessengerTransportProvider(),
   ],
   controllers: [MessageController],
-  exports: [MessengerService],
+  exports: [
+    MESSENGER_TRANSPORT,
+    MESSENGER_MODULE_OPTS,
+    MessengerService,
+  ],
 })
 export default class MessengerModule {
   static register(options: IMessengerOptions = {}) : DynamicModule {
